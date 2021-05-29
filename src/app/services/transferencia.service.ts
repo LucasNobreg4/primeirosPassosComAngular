@@ -20,10 +20,11 @@ export class TransferenciaService {
   todas(): Observable<Transferencia[]> {
     return this.HttpClient.get<Transferencia[]>(this.url);
   }
-  adicionar(transferencia: any) {
+  adicionar(transferencia: Transferencia): Observable<Transferencia> {
     this.hidratar(transferencia);
 
-    this.listaTransferencia.push(transferencia);
+    return this.HttpClient.post<Transferencia>(this.url, transferencia);
+    /* essa linha é responsavel por fazer a tranferencia de dados para a nossa API utilizando o metodo post */
   }
 
   private hidratar(transferencia: any) {
